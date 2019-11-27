@@ -1,0 +1,35 @@
+.SearchBox {
+  position: absolute;
+  left: 20;
+  top: 0;
+}
+
+.inputElement {
+  position: absolute;
+  left: 0;
+  top: 10;
+}
+
+.search-container {
+  position: absolute;
+  top: 10;
+  width: 30vw;
+  left: 20;
+  height: 80vh;
+  /* overflow-y: scroll; */
+  font-family: "Alata", sans-serif;
+}
+ul {
+  list-style-type: none;
+  cursor: pointer;
+}
+
+li {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .search-container {
+    width: 100vw;
+  }
+}

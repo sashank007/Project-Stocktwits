@@ -43,7 +43,7 @@ export default function TweetList(props) {
           <TweetItems />
         </List>
       ) : (
-        <div>hi</div>
+        <div>No tweets to display</div>
       )}
     </div>
   );
