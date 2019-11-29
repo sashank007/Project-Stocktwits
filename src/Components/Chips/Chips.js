@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Chip from "@material-ui/core/Chip";
 import Paper from "@material-ui/core/Paper";
@@ -19,8 +19,11 @@ const useStyles = makeStyles(theme => ({
 export default function Chips(props) {
   const classes = useStyles();
   const { chipData } = props;
+
+  useEffect(() => {}, []);
+
   const handleDelete = chipToDelete => () => {
-    // setChipData(chips => chips.filter(chip => chip.key !== chipToDelete.key));
+    props.handleDelete(chipToDelete);
   };
 
   return (
@@ -32,7 +35,7 @@ export default function Chips(props) {
             key={data.key}
             icon={icon}
             label={data.label}
-            onDelete={data.label === "React" ? undefined : handleDelete(data)}
+            onDelete={handleDelete(data)}
             className={classes.chip}
           />
         );

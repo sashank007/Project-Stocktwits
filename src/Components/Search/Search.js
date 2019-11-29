@@ -16,7 +16,7 @@ export default function Search(props) {
           let { results } = JSON.parse(body);
           props.populateContainer(results);
         });
-    }
+    } else props.populateContainer([]);
   };
   return (
     <div>

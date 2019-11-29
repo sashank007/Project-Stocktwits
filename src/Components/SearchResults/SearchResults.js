@@ -27,14 +27,21 @@ const SearchResults = props => {
       display: "inline"
     }
   }));
-  useEffect(() => {}, [results]);
+  useEffect(() => {}, []);
   const classes = useStyles();
+
+  const updateChip = symbol => {
+    props.updateChip(symbol);
+  };
 
   const AllResults = () => {
     console.log("all results: ", results);
-    if (results) {
+    if (results && results.length > 0) {
       return results.map((val, i) => (
-        <ListItem alignItems="flex-start">
+        <ListItem
+          alignItems="flex-start"
+          onClick={() => updateChip(results[i].symbol)}
+        >
           <ListItemText
             primary={results[i].symbol}
             secondary={
@@ -51,28 +58,6 @@ const SearchResults = props => {
         </ListItem>
       ));
     } else return <div></div>;
-    // let totalTracks = [];
-    // if (tracks) {
-    //   tracks.map((keyName, i) => {
-    //     let currentTrack = tracks[i];
-    //     if (
-    //       currentTrack.hasOwnProperty("album") &&
-    //       currentTrack.album.hasOwnProperty("images") &&
-    //       currentTrack.album.images.length > 0
-    //     ) {
-    //       let trackItem = (
-    //         <TrackItem
-    //           key={i}
-    //           id={i}
-    //           trackImage={tracks[i].album.images[0].url}
-    //           trackName={tracks[i].name}
-    //         />
-    //       );
-    //       totalTracks.push(trackItem);
-    //     }
-    //   });
-    //   return totalTracks;
-    // }
   };
 
   return (
