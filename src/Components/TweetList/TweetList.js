@@ -30,14 +30,19 @@ export default function TweetList(props) {
   }, [props, messages]);
 
   const TweetItems = () => {
-    console.log("messages: ", messages);
     if (messages && messages.length > 0) {
       return messages.map((val, index) => {
         let { body, created_at } = val;
         let { avatar_url, username } = val.user;
         return <TweetItem name={username} avatar={avatar_url} tweet={body} />;
       });
-    } else return <div></div>;
+    } else
+      return (
+        <div>
+          Get the latest tweets for stocks here! Go ahead and search for a
+          stock...
+        </div>
+      );
   };
 
   return (

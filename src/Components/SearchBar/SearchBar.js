@@ -103,7 +103,6 @@ export default function SearchBar(props) {
   const searchValue = e => {
     let val = e.target.value;
     console.log("search: ", val);
-
     props.searchSymbols(val);
   };
 
@@ -153,7 +152,7 @@ export default function SearchBar(props) {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" style={{ background: "#2f3336" }}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -171,7 +170,7 @@ export default function SearchBar(props) {
               <SearchIcon />
             </div>
             <InputBase
-              placeholder="Search…"
+              placeholder="Search for stocks here…"
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput

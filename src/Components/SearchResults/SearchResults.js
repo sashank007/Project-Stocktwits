@@ -12,13 +12,14 @@ const SearchResults = props => {
 
   const useStyles = makeStyles(theme => ({
     root: {
+      display: "block",
       width: "60%",
       maxWidth: "60vw",
       marginLeft: "10vw",
       maxHeight: "35vh",
       overflow: "auto",
       color: "#0000004a",
-      display: "block",
+
       backgroundColor: "#fff",
       border: "0.4px solid black",
       fontFamily: "'PT Sans Narrow', sans-serif"
@@ -61,12 +62,18 @@ const SearchResults = props => {
   };
 
   return (
-    <div className="search-container">
-      <List className={classes.root} style={{ padding: "0px" }}>
-        <div>
-          <AllResults />
+    <div>
+      {results !== null ? (
+        <div className="search-container">
+          <List className={classes.root} style={{ padding: "0px" }}>
+            <div>
+              <AllResults />
+            </div>
+          </List>
         </div>
-      </List>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 };

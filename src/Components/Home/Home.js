@@ -10,6 +10,7 @@ export default function Home() {
   const [tweets, setTweets] = useState([]);
   const [searchResults, setSearchResults] = useState(null);
   const [chipData, setChipData] = useState([]);
+  const twitterBlue = "#1da1f2";
 
   //get the tweets based on whichever search option given
   const getTweets = () => {
@@ -19,7 +20,7 @@ export default function Home() {
     setTweets([]);
     chipData.map(data => {
       console.log("chip data: ", data);
-      if (data.color === "red") {
+      if (data.color === twitterBlue) {
         active++;
         getAllTweets(data.label)
           .then(res => res.json())
@@ -44,7 +45,7 @@ export default function Home() {
 
   const updateChip = symbol => {
     if (symbol !== "" && symbol !== undefined) {
-      let chip = { label: symbol, key: symbol, color: "red" };
+      let chip = { label: symbol, key: symbol, color: twitterBlue };
       setChipData(chipData => [...chipData, chip]);
     }
   };
@@ -59,8 +60,8 @@ export default function Home() {
     let newChipData = [...chipData];
     for (let i = 0; i < newChipData.length; i++) {
       if (newChipData[i] === chip && newChipData[i].color === "grey")
-        newChipData[i].color = "red";
-      else if (newChipData[i] === chip && newChipData[i].color === "red")
+        newChipData[i].color = twitterBlue;
+      else if (newChipData[i] === chip && newChipData[i].color === twitterBlue)
         newChipData[i].color = "grey";
     }
     console.log("c  : ", newChipData);

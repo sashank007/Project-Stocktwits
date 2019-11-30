@@ -39,7 +39,7 @@ export default function Chips(props) {
           <Chip
             key={data.key}
             icon={icon}
-            style={{ background: data.color }}
+            style={{ color: "white", background: data.color }}
             onClick={() => handleClick(data)}
             label={data.label}
             onDelete={handleDelete(data)}

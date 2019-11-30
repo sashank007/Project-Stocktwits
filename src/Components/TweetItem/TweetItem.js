@@ -43,6 +43,7 @@ export default function TweetItem(props) {
               <Typography
                 component="span"
                 variant="body2"
+                style={{ color: "rgb(20, 23, 26)" }}
                 className={classes.inline}
                 color="textPrimary"
               >
