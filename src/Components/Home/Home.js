@@ -16,19 +16,17 @@ export default function Home() {
   const getTweets = () => {
     //for each symbol, create a new section and get all tweets
     //loop through symbols array
-    let active = 0;
+
     setTweets([]);
     chipData.map(data => {
-      console.log("chip data: ", data);
       if (data.color === twitterBlue) {
-        active++;
         getAllTweets(data.label)
           .then(res => res.json())
           .then(res => {
             let body = JSON.parse(res.body);
 
             let { messages } = body;
-            console.log("tweets changed: ", messages);
+
             setTweets(tweets => [...tweets, ...messages]);
           });
       }
@@ -38,7 +36,6 @@ export default function Home() {
 
   const populateContainer = results => {
     console.log("results : ", results);
-
     setSearchResults(results);
   };
   //get all values inside of search bar
@@ -66,10 +63,6 @@ export default function Home() {
     }
     console.log("c  : ", newChipData);
     setChipData(newChipData);
-    // let c = newChipData.pop(newChipData.indexOf(chip));
-    // c.color = "red";
-    // console.log("new chip dta: ", newChipData, c);
-    // setChipData(chipData => [...chipData, c]);
   };
 
   useEffect(() => {

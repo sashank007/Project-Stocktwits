@@ -24,7 +24,6 @@ export default function TweetList(props) {
   const { messages } = props;
 
   useEffect(() => {
-    console.log("props in tweetlist: ", props);
     TweetItems(messages);
     return () => {};
   }, [props, messages]);
@@ -34,7 +33,18 @@ export default function TweetList(props) {
       return messages.map((val, index) => {
         let { body, created_at } = val;
         let { avatar_url, username } = val.user;
-        return <TweetItem name={username} avatar={avatar_url} tweet={body} />;
+        let { symbol } = val.symbols[0];
+
+        return (
+          <TweetItem
+            key={index}
+            name={username}
+            createdAt={created_at}
+            avatar={avatar_url}
+            tweet={body}
+            symbol={symbol}
+          />
+        );
       });
     } else
       return (

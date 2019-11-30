@@ -41,6 +41,7 @@ const SearchResults = props => {
       return results.map((val, i) => (
         <ListItem
           alignItems="flex-start"
+          key={i}
           onClick={() => updateChip(results[i].symbol)}
         >
           <ListItemText
