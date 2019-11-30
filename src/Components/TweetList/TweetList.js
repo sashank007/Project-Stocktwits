@@ -5,8 +5,13 @@ import TweetItem from "../TweetItem/TweetItem";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "100%",
-    maxWidth: "100vw",
+    width: "80%",
+    maxWidth: "80vw",
+    border: "0.5px solid grey",
+    marginTop: "2vw",
+    marginLeft: "auto",
+    marginRight: "auto",
+
     backgroundColor: theme.palette.background.paper
   },
   inline: {
@@ -28,12 +33,11 @@ export default function TweetList(props) {
     console.log("messages: ", messages);
     if (messages && messages.length > 0) {
       return messages.map((val, index) => {
-        console.log(val);
         let { body, created_at } = val;
         let { avatar_url, username } = val.user;
         return <TweetItem name={username} avatar={avatar_url} tweet={body} />;
       });
-    }
+    } else return <div></div>;
   };
 
   return (

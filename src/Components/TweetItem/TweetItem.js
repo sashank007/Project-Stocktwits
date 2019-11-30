@@ -11,6 +11,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
     maxWidth: 600,
+    padding: "20px",
     backgroundColor: theme.palette.background.paper
   },
   inline: {
@@ -33,13 +34,21 @@ export default function TweetItem(props) {
             <React.Fragment>
               <Typography
                 component="span"
+                variant="h6"
+                className={classes.inline}
+                color="textPrimary"
+              >
+                {name} -
+              </Typography>
+              <Typography
+                component="span"
                 variant="body2"
                 className={classes.inline}
                 color="textPrimary"
               >
-                {name}
+                {" "}
+                {tweet}
               </Typography>
-              - {tweet}
             </React.Fragment>
           }
         />

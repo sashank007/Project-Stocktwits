@@ -20,12 +20,17 @@ export default function Chips(props) {
   const classes = useStyles();
   const { chipData } = props;
 
-  useEffect(() => {}, []);
+  useEffect(() => {}, [chipData]);
 
   const handleDelete = chipToDelete => () => {
     props.handleDelete(chipToDelete);
   };
 
+  const handleClick = chip => {
+    console.log("clicked on chiP: ", chip);
+    console.log("chipdata : ", chipData);
+    props.handleChipClick(chip);
+  };
   return (
     <Paper className={classes.root}>
       {chipData.map(data => {
@@ -34,6 +39,8 @@ export default function Chips(props) {
           <Chip
             key={data.key}
             icon={icon}
+            style={{ background: data.color }}
+            onClick={() => handleClick(data)}
             label={data.label}
             onDelete={handleDelete(data)}
             className={classes.chip}

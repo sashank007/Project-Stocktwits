@@ -36,7 +36,7 @@ const SearchResults = props => {
 
   const AllResults = () => {
     console.log("all results: ", results);
-    if (results && results.length > 0) {
+    if (results !== null && results.length > 0) {
       return results.map((val, i) => (
         <ListItem
           alignItems="flex-start"
@@ -62,7 +62,7 @@ const SearchResults = props => {
 
   return (
     <div className="search-container">
-      <List className={classes.root}>
+      <List className={classes.root} style={{ padding: "0px" }}>
         <div>
           <AllResults />
         </div>

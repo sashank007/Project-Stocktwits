@@ -5,6 +5,7 @@ import SearchBar from "../SearchBar/SearchBar";
 
 export default function Search(props) {
   const searchSymbols = inp => {
+    console.log("inp : ", inp);
     if (inp !== null && inp !== "") {
       //call middleware
       getSymbols(inp)
