@@ -3,7 +3,6 @@ import { getAllTweets } from "../../Api";
 import TweetList from "../TweetList/TweetList";
 import Search from "../Search/Search";
 import SearchResults from "../SearchResults/SearchResults";
-import { Chip } from "@material-ui/core";
 import Chips from "../Chips/Chips";
 
 export default function Home() {

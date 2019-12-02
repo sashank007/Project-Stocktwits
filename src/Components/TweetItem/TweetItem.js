@@ -44,7 +44,7 @@ export default function TweetItem(props) {
                 className={classes.inline}
                 color="textPrimary"
               >
-                {name} -
+                <b> {name}</b>
               </Typography>
               <br />
               <Typography

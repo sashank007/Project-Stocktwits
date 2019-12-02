@@ -153,7 +153,7 @@ export default function SearchBar(props) {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" style={{ background: "#2f3336" }}>
+      <AppBar position="static" style={{ background: "#51a1de" }}>
         <Toolbar>
           <IconButton
             edge="start"
