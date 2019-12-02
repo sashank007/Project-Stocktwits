@@ -13,16 +13,34 @@ const SearchResults = props => {
   const useStyles = makeStyles(theme => ({
     root: {
       display: "block",
-      width: "60%",
+      width: "100%",
       maxWidth: "60vw",
-      marginLeft: "10vw",
+      marginLeft: "15vw",
       maxHeight: "35vh",
       overflow: "auto",
       color: "#0000004a",
-
+      boxShadow:
+        " 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08)",
+      borderRadius: "0 0 24px 24px",
+      paddingBottom: "4px",
       backgroundColor: "#fff",
       border: "0.4px solid black",
-      fontFamily: "'PT Sans Narrow', sans-serif"
+      fontFamily: "'PT Sans Narrow', sans-serif",
+      [theme.breakpoints.up("md")]: {
+        width: 200
+      },
+      [theme.breakpoints.up("md")]: {
+        display: "flex"
+      },
+      [theme.breakpoints.down("1000")]: {
+        marginLeft: "25vw"
+      },
+      [theme.breakpoints.down("600")]: {
+        marginLeft: "15vw"
+      },
+      [theme.breakpoints.up("1439")]: {
+        marginLeft: "5vw"
+      }
     },
     inline: {
       display: "inline"
