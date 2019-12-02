@@ -12,6 +12,7 @@
 }
 
 .search-container {
+  background: transparent;
   position: absolute;
   top: 10;
   width: 30vw;

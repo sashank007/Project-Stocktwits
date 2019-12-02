@@ -31,7 +31,10 @@ export default function TweetItem(props) {
 
   return (
     <div>
-      <ListItem alignItems="flex-start">
+      <ListItem
+        alignItems="flex-start"
+        style={{ paddingLeft: "2vw", paddingRight: "2vw" }}
+      >
         <ListItemAvatar>
           <Avatar alt="Remy Sharp" src={avatar} />
         </ListItemAvatar>
