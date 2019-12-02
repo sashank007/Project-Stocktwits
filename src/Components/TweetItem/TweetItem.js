@@ -26,6 +26,8 @@ const useStyles = makeStyles(theme => ({
 export default function TweetItem(props) {
   const classes = useStyles();
   const { name, avatar, tweet, createdAt, symbol } = props;
+  let time = new Date(createdAt).toTimeString();
+  let date = new Date(createdAt).toLocaleDateString();
 
   return (
     <div>
@@ -56,7 +58,7 @@ export default function TweetItem(props) {
                 {tweet}
               </Typography>
               <br />
-              {new Date(createdAt).toDateString()}
+              {date} {time}
               <Typography variant="body2" className={classes.symbol}>
                 {" "}
                 {symbol}

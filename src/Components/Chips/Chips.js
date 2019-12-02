@@ -27,8 +27,6 @@ export default function Chips(props) {
   };
 
   const handleClick = chip => {
-    console.log("clicked on chiP: ", chip);
-    console.log("chipdata : ", chipData);
     props.handleChipClick(chip);
   };
   return (

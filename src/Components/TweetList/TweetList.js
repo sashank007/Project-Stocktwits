@@ -26,14 +26,14 @@ export default function TweetList(props) {
   useEffect(() => {
     TweetItems(messages);
     return () => {};
-  }, [props, messages]);
+  }, []);
 
   const TweetItems = () => {
     if (messages && messages.length > 0) {
       return messages.map((val, index) => {
-        let { body, created_at } = val;
+        let { body, created_at, symbol } = val;
         let { avatar_url, username } = val.user;
-        let { symbol } = val.symbols[0];
+        // let { symbol } = val.symbols[0];
 
         return (
           <TweetItem

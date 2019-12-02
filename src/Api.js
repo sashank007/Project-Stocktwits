@@ -9,6 +9,7 @@ const getSymbolsURI =
 export function getAllTweets(symbol) {
   return fetch(getTweetsURI, {
     method: "POST",
+    mode: "cors",
     headers: new Headers({
       "content-type": "application/json"
     }),
@@ -21,6 +22,7 @@ export function getAllTweets(symbol) {
 export function getSymbols(query) {
   return fetch(getSymbolsURI, {
     method: "POST",
+    mode: "cors",
     headers: new Headers({
       "content-type": "application/json"
     }),

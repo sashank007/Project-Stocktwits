@@ -28,6 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
   search: {
     position: "relative",
+    display: "inline-block",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
@@ -102,7 +103,7 @@ export default function SearchBar(props) {
 
   const searchValue = e => {
     let val = e.target.value;
-    console.log("search: ", val);
+
     props.searchSymbols(val);
   };
 
