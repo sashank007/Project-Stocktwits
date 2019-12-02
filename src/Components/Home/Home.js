@@ -73,6 +73,7 @@ export default function Home() {
   const getTweets = () => {
     //for each symbol, create a new section and get all tweets
     //loop through symbols array
+    console.log("getting tweets...");
 
     let chips = chipData.filter(chip => chip.color === twitterBlue);
     if (chips.length > 0) {
