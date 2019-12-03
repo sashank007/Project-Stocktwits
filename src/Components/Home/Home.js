@@ -60,14 +60,15 @@ export default function Home() {
               let body = JSON.parse(res.body);
               active++;
               let { messages } = body;
-
-              messages = messages.map(function(el) {
-                var o = Object.assign({}, el);
-                o.symbol = data.label;
-                return o;
-              });
-              newTweets = newTweets.concat(messages);
-              return newTweets;
+              if (body.response.status === 200) {
+                messages = messages.map(function(el) {
+                  var o = Object.assign({}, el);
+                  o.symbol = data.label;
+                  return o;
+                });
+                newTweets = newTweets.concat(messages);
+                return newTweets;
+              } else return tweets;
             })
             .then(newTweets => {
               if (active === chips.length && newTweets !== tweets) {
@@ -105,14 +106,15 @@ export default function Home() {
               let body = JSON.parse(res.body);
               active++;
               let { messages } = body;
-
-              messages = messages.map(function(el) {
-                var o = Object.assign({}, el);
-                o.symbol = data.label;
-                return o;
-              });
-              newTweets = newTweets.concat(messages);
-              return newTweets;
+              if (body.response.status === 200) {
+                messages = messages.map(function(el) {
+                  var o = Object.assign({}, el);
+                  o.symbol = data.label;
+                  return o;
+                });
+                newTweets = newTweets.concat(messages);
+                return newTweets;
+              } else return tweets;
             })
             .then(newTweets => {
               if (active === chips.length && newTweets !== tweets) {

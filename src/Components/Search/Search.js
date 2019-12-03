@@ -12,15 +12,9 @@ export default function Search(props) {
   const searchSymbols = inp => {
     if (inp !== null && inp !== "") {
       //call middleware
+      //then set all symbol list items inside of the list container
       getSymbols(inp)
-        // .then(res => {
-        //   let { body } = res;
-        //   console.log(body.json());
-        //   // return JSON.parse(body);
-        // })
-        // .then(res => JSON.parse(res))
         .then(res => res.json())
-        //then set all symbol list items inside of the list container
         .then(res => {
           let { body } = res;
           body = JSON.parse(body);
