@@ -6,11 +6,13 @@ import SearchResults from "../SearchResults/SearchResults";
 import Chips from "../Chips/Chips";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NavDrawer from "../NavDrawer/NavDrawer";
 
 export default function Home() {
   const [tweets, setTweets] = useState([]);
   const [searchResults, setSearchResults] = useState(null);
   const [chipData, setChipData] = useState([]);
+  const [showDrawer, setShowDrawer] = useState(false);
   const twitterBlue = "#1da1f2";
 
   function useInterval(callback, delay) {
@@ -144,8 +146,24 @@ export default function Home() {
     }
 
     setChipData(newChipData);
+    getTweets();
+  };
+  const handleChipClickNav = chip => {
+    let newChipData = [...chipData];
+
+    for (let i = 0; i < newChipData.length; i++) {
+      if (newChipData[i] === chip) newChipData[i].color = twitterBlue;
+      else newChipData[i].color = "grey";
+    }
+
+    setChipData(newChipData);
+    getTweets();
   };
 
+  const toggleDrawer = open => {
+    console.log("toggle drawer: ", open);
+    setShowDrawer(open);
+  };
   useEffect(() => {
     getTweets();
 
@@ -154,7 +172,10 @@ export default function Home() {
 
   return (
     <div>
-      <Search populateContainer={populateContainer} />
+      <Search
+        populateContainer={populateContainer}
+        toggleDrawer={toggleDrawer}
+      />
       <SearchResults results={searchResults} updateChip={updateChip} />
       <Chips
         chipData={chipData}
@@ -163,6 +184,12 @@ export default function Home() {
       />
       {<TweetList messages={tweets} />}
       <ToastContainer />
+      <NavDrawer
+        symbolClick={handleChipClickNav}
+        chips={chipData}
+        toggleDrawer={toggleDrawer}
+        showDrawer={showDrawer}
+      />
     </div>
   );
 }

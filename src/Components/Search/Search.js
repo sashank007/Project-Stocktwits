@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { getSymbols } from "../../Api";
 
 import SearchBar from "../SearchBar/SearchBar";
 
 export default function Search(props) {
+  const toggleDrawer = open => {
+    console.log("toggledrwaer in search");
+    props.toggleDrawer(open);
+  };
+
   const searchSymbols = inp => {
     if (inp !== null && inp !== "") {
       //call middleware
@@ -20,7 +25,7 @@ export default function Search(props) {
   };
   return (
     <div>
-      <SearchBar searchSymbols={searchSymbols} />
+      <SearchBar toggleDrawer={toggleDrawer} searchSymbols={searchSymbols} />
     </div>
   );
 }

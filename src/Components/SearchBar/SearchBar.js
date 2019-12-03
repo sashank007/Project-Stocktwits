@@ -101,6 +101,11 @@ export default function SearchBar(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const openDrawer = () => {
+    console.log("open drawer");
+    props.toggleDrawer(true);
+  };
+
   const searchValue = e => {
     let val = e.target.value;
 
@@ -157,6 +162,7 @@ export default function SearchBar(props) {
         <Toolbar>
           <IconButton
             edge="start"
+            onClick={() => openDrawer()}
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
