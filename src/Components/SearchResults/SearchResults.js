@@ -24,7 +24,7 @@ const SearchResults = props => {
       borderRadius: "0 0 24px 24px",
       paddingBottom: "4px",
       backgroundColor: "#fff",
-      border: "0.4px solid black",
+      // border: "0.4px solid black",
       fontFamily: "'PT Sans Narrow', sans-serif",
       [theme.breakpoints.up("md")]: {
         width: 200
