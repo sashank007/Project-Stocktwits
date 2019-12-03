@@ -34,6 +34,7 @@ export default function Home() {
   const notify = chip => toast(`${chip} added`);
 
   useInterval(() => {
+    console.log("use interval...");
     let chips = chipData.filter(chip => chip.color === twitterBlue);
     if (chips.length > 0) {
       let newTweets = [];

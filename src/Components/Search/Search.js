@@ -13,12 +13,20 @@ export default function Search(props) {
     if (inp !== null && inp !== "") {
       //call middleware
       getSymbols(inp)
+        // .then(res => {
+        //   let { body } = res;
+        //   console.log(body.json());
+        //   // return JSON.parse(body);
+        // })
+        // .then(res => JSON.parse(res))
         .then(res => res.json())
         //then set all symbol list items inside of the list container
         .then(res => {
           let { body } = res;
+          body = JSON.parse(body);
+          let { results } = body;
+          console.log("body: ", results);
 
-          let { results } = JSON.parse(body);
           props.populateContainer(results);
         });
     } else props.populateContainer([]);

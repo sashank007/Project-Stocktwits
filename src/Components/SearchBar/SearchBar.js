@@ -188,17 +188,6 @@ export default function SearchBar(props) {
           </div>
           <div className={classes.grow} />
           <div className={classes.grow} />
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
