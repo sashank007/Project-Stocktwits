@@ -3,15 +3,27 @@ import { getAllTweets } from "../../Api";
 import TweetList from "../TweetList/TweetList";
 import Search from "../Search/Search";
 import SearchResults from "../SearchResults/SearchResults";
+import { makeStyles } from "@material-ui/core/styles";
 import Chips from "../Chips/Chips";
 import { ToastContainer, toast } from "react-toastify";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
   const [tweets, setTweets] = useState([]);
   const [searchResults, setSearchResults] = useState(null);
   const [chipData, setChipData] = useState([]);
+  const [displayProgress, setDisplayProgress] = useState(false);
   const twitterBlue = "#1da1f2";
+
+  const useStyles = makeStyles(theme => ({
+    root: {
+      display: "flex",
+      "& > * + *": {
+        marginLeft: theme.spacing(2)
+      }
+    }
+  }));
 
   function useInterval(callback, delay) {
     const savedCallback = useRef();
@@ -75,6 +87,8 @@ export default function Home() {
     //for each symbol, create a new section and get all tweets
     //loop through symbols array
     console.log("getting tweets...");
+    debugger;
+    setDisplayProgress(displayProgress => !displayProgress);
 
     let chips = chipData.filter(chip => chip.color === twitterBlue);
     if (chips.length > 0) {
@@ -111,6 +125,7 @@ export default function Home() {
         }
       });
     } else setTweets([]);
+    setDisplayProgress(false);
   };
 
   const populateContainer = results => {
@@ -153,6 +168,8 @@ export default function Home() {
     return () => {};
   }, []);
 
+  const classes = useStyles();
+
   return (
     <div>
       <Search populateContainer={populateContainer} />
@@ -164,6 +181,19 @@ export default function Home() {
       />
       {<TweetList messages={tweets} />}
       <ToastContainer />
+      {displayProgress && (
+        <div className={classes.root}>
+          (
+          <CircularProgress
+            style={{
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: "2vw"
+            }}
+          />
+          )
+        </div>
+      )}
     </div>
   );
 }
