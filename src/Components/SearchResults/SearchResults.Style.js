@@ -4,6 +4,7 @@ export const useStyles = makeStyles(theme => ({
   root: {
     display: "block",
     width: "100%",
+    cursor: "pointer",
     maxWidth: "60vw",
     marginLeft: "15vw",
     maxHeight: "35vh",

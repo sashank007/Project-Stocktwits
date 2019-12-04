@@ -164,8 +164,9 @@ export default function Home() {
     if (symbol !== "" && symbol !== undefined) {
       let chip = { label: symbol, key: symbol, color: twitterBlue, count: 30 };
       let isExists = false;
+
       for (var i = 0; i < chipData.length; i++) {
-        if (chipData[i] === chip) {
+        if (JSON.stringify(chipData[i]) === JSON.stringify(chip)) {
           isExists = true;
           return;
         }
@@ -210,8 +211,10 @@ export default function Home() {
     let newChipData = [...chipData];
 
     for (let i = 0; i < newChipData.length; i++) {
-      if (newChipData[i] === chip) newChipData[i].color = twitterBlue;
-      else {
+      if (newChipData[i] === chip) {
+        newChipData[i].color = twitterBlue;
+        newChipData[i].count = 30;
+      } else {
         newChipData[i].color = "grey";
         newChipData[i].count = 0;
       }
