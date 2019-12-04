@@ -12,6 +12,7 @@ export const useStyles = makeStyles(theme => ({
   },
   symbol: {
     float: "right",
-    color: "#1da1f2"
+    color: "#1da1f2",
+    textShadow: " 0.2px 0.2px 0.2px #000"
   }
 }));

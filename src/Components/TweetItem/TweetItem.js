@@ -47,13 +47,13 @@ export default function TweetItem(props) {
               </Typography>
               <br />
               {date} {time}
-              <Typography variant="body1" className={classes.symbol}>
-                {" "}
-                {symbol}
-              </Typography>
             </React.Fragment>
           }
         />
+        <Typography variant="body2" className={classes.symbol}>
+          {" "}
+          {symbol}
+        </Typography>
       </ListItem>
       <Divider variant="inset" component="li" />
     </div>
