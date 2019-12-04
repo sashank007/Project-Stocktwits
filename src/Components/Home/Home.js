@@ -3,10 +3,8 @@ import { getAllTweets } from "../../Api";
 import TweetList from "../TweetList/TweetList";
 import Search from "../Search/Search";
 import SearchResults from "../SearchResults/SearchResults";
-import { makeStyles } from "@material-ui/core/styles";
 import Chips from "../Chips/Chips";
 import { ToastContainer, toast } from "react-toastify";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import "react-toastify/dist/ReactToastify.css";
 import NavDrawer from "../NavDrawer/NavDrawer";
 
@@ -15,17 +13,14 @@ export default function Home() {
   const [searchResults, setSearchResults] = useState(null);
   const [chipData, setChipData] = useState([]);
   const [showDrawer, setShowDrawer] = useState(false);
-  const [displayProgress, setDisplayProgress] = useState(false);
+
   const twitterBlue = "#1da1f2";
 
-  const useStyles = makeStyles(theme => ({
-    root: {
-      display: "flex",
-      "& > * + *": {
-        marginLeft: theme.spacing(2)
-      }
-    }
-  }));
+  useEffect(() => {
+    getTweets();
+
+    return () => {};
+  }, []);
 
   function useInterval(callback, delay) {
     const savedCallback = useRef();
@@ -43,10 +38,15 @@ export default function Home() {
       return () => clearInterval(id);
     }, [delay]);
   }
+
+  //when you want to notify if chip has been added
   const notify = chip => toast(`${chip} added`);
 
+  //notify for errors
+  const notifyError = data => toast.error(data);
+
+  //run every 10 seconds to get latest tweets
   useInterval(() => {
-    console.log("use interval...");
     let chips = chipData.filter(chip => chip.color === twitterBlue);
     if (chips.length > 0) {
       let newTweets = [];
@@ -58,9 +58,11 @@ export default function Home() {
             .then(res => res.json())
             .then(res => {
               let body = JSON.parse(res.body);
-              active++;
-              let { messages } = body;
-              if (body.response.status === 200) {
+
+              if (res.statusCode === 200) {
+                active++;
+                let { messages } = body;
+
                 messages = messages.map(function(el) {
                   var o = Object.assign({}, el);
                   o.symbol = data.label;
@@ -68,10 +70,16 @@ export default function Home() {
                 });
                 newTweets = newTweets.concat(messages);
                 return newTweets;
-              } else return tweets;
+              } else {
+                return tweets;
+              }
             })
             .then(newTweets => {
-              if (active === chips.length && newTweets !== tweets) {
+              if (
+                active === chips.length &&
+                newTweets !== tweets &&
+                newTweets.length > 0
+              ) {
                 newTweets.sort((a, b) => {
                   let d1 = new Date(b.created_at);
                   let d2 = new Date(a.created_at);
@@ -81,18 +89,15 @@ export default function Home() {
               }
             });
         }
+        return null;
       });
     } else setTweets([]);
-  }, 5000);
+  }, 10000);
 
   //get the tweets based on whichever search option given
+  //for each symbol, create a new section and get all tweets
+  //loop through symbols array
   const getTweets = () => {
-    //for each symbol, create a new section and get all tweets
-    //loop through symbols array
-    console.log("getting tweets...");
-
-    setDisplayProgress(displayProgress => !displayProgress);
-
     let chips = chipData.filter(chip => chip.color === twitterBlue);
     if (chips.length > 0) {
       let newTweets = [];
@@ -104,9 +109,9 @@ export default function Home() {
             .then(res => res.json())
             .then(res => {
               let body = JSON.parse(res.body);
-              active++;
-              let { messages } = body;
-              if (body.response.status === 200) {
+              if (res.statusCode === 200) {
+                active++;
+                let { messages } = body;
                 messages = messages.map(function(el) {
                   var o = Object.assign({}, el);
                   o.symbol = data.label;
@@ -114,7 +119,13 @@ export default function Home() {
                 });
                 newTweets = newTweets.concat(messages);
                 return newTweets;
-              } else return tweets;
+              } else {
+                notifyError(
+                  "Oops, looks like you made more than 200 requests in this hour. Please try after some time."
+                );
+
+                return tweets;
+              }
             })
             .then(newTweets => {
               if (active === chips.length && newTweets !== tweets) {
@@ -127,23 +138,31 @@ export default function Home() {
               }
             });
         }
+        return null;
       });
     } else setTweets([]);
-    setDisplayProgress(false);
   };
 
   const populateContainer = results => {
     setSearchResults(results);
   };
-  //get all values inside of search bar
 
+  //get all values inside of search bar
   const updateChip = symbol => {
     if (symbol !== "" && symbol !== undefined) {
       let chip = { label: symbol, key: symbol, color: twitterBlue };
-      setChipData(chipData => [...chipData, chip]);
-
-      getTweets();
-      notify(symbol);
+      let isExists = false;
+      for (var i = 0; i < chipData.length; i++) {
+        if (chipData[i] === chip) {
+          isExists = true;
+          return;
+        }
+      }
+      if (!isExists) {
+        setChipData(chipData => [...chipData, chip]);
+        getTweets();
+        notify(symbol);
+      }
     }
   };
 
@@ -153,6 +172,7 @@ export default function Home() {
     );
   };
 
+  //when click on chip, only display that stock
   const handleChipClick = chip => {
     let newChipData = [...chipData];
 
@@ -166,6 +186,8 @@ export default function Home() {
     setChipData(newChipData);
     getTweets();
   };
+
+  //when you click on nav symbol, only display that stock
   const handleChipClickNav = chip => {
     let newChipData = [...chipData];
 
@@ -179,16 +201,8 @@ export default function Home() {
   };
 
   const toggleDrawer = open => {
-    console.log("toggle drawer: ", open);
     setShowDrawer(open);
   };
-  useEffect(() => {
-    getTweets();
-
-    return () => {};
-  }, []);
-
-  const classes = useStyles();
 
   return (
     <div>
@@ -210,19 +224,6 @@ export default function Home() {
         toggleDrawer={toggleDrawer}
         showDrawer={showDrawer}
       />
-      {displayProgress && (
-        <div className={classes.root}>
-          (
-          <CircularProgress
-            style={{
-              marginLeft: "auto",
-              marginRight: "auto",
-              marginTop: "2vw"
-            }}
-          />
-          )
-        </div>
-      )}
     </div>
   );
 }

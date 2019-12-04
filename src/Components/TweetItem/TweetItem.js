@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import Divider from "@material-ui/core/Divider";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -7,21 +6,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "100%",
-    maxWidth: 600,
-    padding: "20px",
-    backgroundColor: theme.palette.background.paper
-  },
-  inline: {
-    display: "inline"
-  },
-  symbol: {
-    float: "right",
-    color: "#1da1f2"
-  }
-}));
+import { useStyles } from "./TweetItem.Style";
 
 export default function TweetItem(props) {
   const classes = useStyles();
@@ -53,7 +38,7 @@ export default function TweetItem(props) {
               <Typography
                 component="span"
                 variant="body2"
-                style={{ color: "rgb(20, 23, 26)" }}
+                style={{ color: "rgb(20, 23, 26)", maxWidth: "80%" }}
                 className={classes.inline}
                 color="textPrimary"
               >

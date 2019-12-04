@@ -1,23 +1,7 @@
 import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import TweetItem from "../TweetItem/TweetItem";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    width: "80%",
-    maxWidth: "80vw",
-    border: "0.5px solid grey",
-    marginTop: "2vw",
-    marginLeft: "auto",
-    marginRight: "auto",
-
-    backgroundColor: theme.palette.background.paper
-  },
-  inline: {
-    display: "inline"
-  }
-}));
+import { useStyles } from "./TweetList.Style";
 
 export default function TweetList(props) {
   const classes = useStyles();
@@ -33,7 +17,6 @@ export default function TweetList(props) {
       return messages.map((val, index) => {
         let { body, created_at, symbol } = val;
         let { avatar_url, username } = val.user;
-        // let { symbol } = val.symbols[0];
 
         return (
           <TweetItem

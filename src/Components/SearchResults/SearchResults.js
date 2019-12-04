@@ -1,51 +1,15 @@
 /* eslint-disable no-restricted-globals */
 import React, { useEffect } from "react";
 import "./SearchResults.css";
-import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 
+import { useStyles } from "./SearchResults.Style.js";
 const SearchResults = props => {
   let { results } = props;
 
-  const useStyles = makeStyles(theme => ({
-    root: {
-      display: "block",
-      width: "100%",
-      maxWidth: "60vw",
-      marginLeft: "15vw",
-      maxHeight: "35vh",
-      overflow: "auto",
-      color: "#0000004a",
-      boxShadow:
-        " 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08)",
-      borderRadius: "0 0 24px 24px",
-      paddingBottom: "4px",
-      backgroundColor: "#fff",
-      // border: "0.4px solid black",
-      fontFamily: "'PT Sans Narrow', sans-serif",
-      [theme.breakpoints.up("md")]: {
-        width: 200
-      },
-      [theme.breakpoints.up("md")]: {
-        display: "flex"
-      },
-      [theme.breakpoints.down("1000")]: {
-        marginLeft: "25vw"
-      },
-      [theme.breakpoints.down("600")]: {
-        marginLeft: "15vw"
-      },
-      [theme.breakpoints.up("1439")]: {
-        marginLeft: "5vw"
-      }
-    },
-    inline: {
-      display: "inline"
-    }
-  }));
   useEffect(() => {}, []);
   const classes = useStyles();
 
@@ -54,8 +18,7 @@ const SearchResults = props => {
   };
 
   const AllResults = () => {
-    console.log("all results: ", results);
-    if (results !== null && results.length > 0) {
+    if (results && results !== null && results.length > 0) {
       return results.map((val, i) => (
         <ListItem
           alignItems="flex-start"
@@ -83,7 +46,7 @@ const SearchResults = props => {
   return (
     <div>
       {results !== null ? (
-        <div className="search-container">
+        <div className={classes.searchContainer}>
           <List className={classes.root} style={{ padding: "0px" }}>
             <div>
               <AllResults />
