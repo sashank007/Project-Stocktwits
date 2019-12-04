@@ -47,7 +47,7 @@ export default function TweetItem(props) {
               </Typography>
               <br />
               {date} {time}
-              <Typography variant="body2" className={classes.symbol}>
+              <Typography variant="body1" className={classes.symbol}>
                 {" "}
                 {symbol}
               </Typography>

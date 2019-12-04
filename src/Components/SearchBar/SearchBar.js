@@ -78,7 +78,7 @@ export default function SearchBar(props) {
             color="inherit"
             aria-label="open drawer"
           >
-            <img src={Filter} style={{ width: 20, height: 20 }} />
+            <img src={Filter} style={{ width: 20, height: 20 }} alt="filter" />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             StockTalk

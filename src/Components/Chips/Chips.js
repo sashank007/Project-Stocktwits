@@ -20,13 +20,14 @@ export default function Chips(props) {
     <Paper className={classes.root}>
       {chipData.map(data => {
         let icon;
+        let label = data.label + " " + data.count;
         return (
           <Chip
             key={data.key}
             icon={icon}
             style={{ color: "white", background: data.color }}
             onClick={() => handleClick(data)}
-            label={data.label}
+            label={label}
             onDelete={handleDelete(data)}
             className={classes.chip}
           />

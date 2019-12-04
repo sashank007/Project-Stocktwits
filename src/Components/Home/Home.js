@@ -40,7 +40,7 @@ export default function Home() {
   }
 
   //when you want to notify if chip has been added
-  const notify = chip => toast(`${chip} added`);
+  const notify = chip => toast(`Getting tweets for ${chip}...`);
 
   //notify for errors
   const notifyError = data => toast.error(data);
@@ -52,6 +52,7 @@ export default function Home() {
       let newTweets = [];
 
       let active = 0;
+
       chips.map(data => {
         if (data.color === twitterBlue) {
           getAllTweets(data.label)
@@ -85,9 +86,17 @@ export default function Home() {
                   let d2 = new Date(a.created_at);
                   return d1 - d2;
                 });
+
                 setTweets(newTweets);
               }
             });
+        } else {
+          let newChipData = [...chipData];
+          newChipData.map(chip => {
+            if (chip === data) chip.count = 0;
+          });
+
+          setChipData(newChipData);
         }
         return null;
       });
@@ -99,6 +108,7 @@ export default function Home() {
   //loop through symbols array
   const getTweets = () => {
     let chips = chipData.filter(chip => chip.color === twitterBlue);
+
     if (chips.length > 0) {
       let newTweets = [];
 
@@ -118,6 +128,7 @@ export default function Home() {
                   return o;
                 });
                 newTweets = newTweets.concat(messages);
+
                 return newTweets;
               } else {
                 notifyError(
@@ -134,6 +145,7 @@ export default function Home() {
                   let d2 = new Date(a.created_at);
                   return d1 - d2;
                 });
+
                 setTweets(newTweets);
               }
             });
@@ -150,7 +162,7 @@ export default function Home() {
   //get all values inside of search bar
   const updateChip = symbol => {
     if (symbol !== "" && symbol !== undefined) {
-      let chip = { label: symbol, key: symbol, color: twitterBlue };
+      let chip = { label: symbol, key: symbol, color: twitterBlue, count: 30 };
       let isExists = false;
       for (var i = 0; i < chipData.length; i++) {
         if (chipData[i] === chip) {
@@ -177,10 +189,16 @@ export default function Home() {
     let newChipData = [...chipData];
 
     for (let i = 0; i < newChipData.length; i++) {
-      if (newChipData[i] === chip && newChipData[i].color === "grey")
+      if (newChipData[i] === chip && newChipData[i].color === "grey") {
         newChipData[i].color = twitterBlue;
-      else if (newChipData[i] === chip && newChipData[i].color === twitterBlue)
+        newChipData[i].count = 30;
+      } else if (
+        newChipData[i] === chip &&
+        newChipData[i].color === twitterBlue
+      ) {
         newChipData[i].color = "grey";
+        newChipData[i].count = 0;
+      }
     }
 
     setChipData(newChipData);
@@ -193,7 +211,10 @@ export default function Home() {
 
     for (let i = 0; i < newChipData.length; i++) {
       if (newChipData[i] === chip) newChipData[i].color = twitterBlue;
-      else newChipData[i].color = "grey";
+      else {
+        newChipData[i].color = "grey";
+        newChipData[i].count = 0;
+      }
     }
 
     setChipData(newChipData);
